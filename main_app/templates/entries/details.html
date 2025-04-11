@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/entries/entry-detail.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="entry-container">
+  <div class="entry-img">
+    <img src="{% static 'images/entry-icon.png' %}" alt="Entry icon" />
+  </div>
+  <div class="entry-details">
+    <h1>{{ entry.title }}</h1>
+    <div class="mood-container">
+      <div class="mood-emoji" style="color: {{ entry.mood_data.color }}"> Mood: {{ entry.mood_data.emoji }}</div>
+      <div class="mood-label">{{ entry.mood_data.label }}</div>
+    </div>
+    <p class="timestamp">Created: {{ entry.created_at }}</p>
+    {% if entry.updated_at %}
+      <p class="timestamp">Last updated: {{ entry.updated_at }}</p>
+    {% endif %}
+    <div class="entry-content">
+      <p>{{ entry.content }}</p>
+
+      <div class="entry-actions">
+          <a href="{% url 'entry-update' entry.id %}" class="btn warn">Edit</a>
+          <a href="{% url 'entry-delete' entry.id %}" class="btn danger">Delete</a>
+        <a href="{% url 'entry-archive' entry.id %}" class="archive-btn {% if entry.is_archived %}archived{% endif %}" title="{% if entry.is_archived %}Unarchive{% else %}Archive{% endif %}">
+          <img src="{% static 'images/archive-icon.png' %}" alt="Archive icon" style="height: 80px; position: relative; top: 33px; right: 5px; filter: brightness(0.2) contrast(2);">
+        </a>
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <div class="comments-header">
+        <h2>Reflection Section    <button class="btn submit" onclick="toggleCommentForm()" id="addCommentBtn">Reflect</button></h2>
+        
+      </div>
+
+      <form action="" method="post" class="comment-form" id="commentForm" style="display: none;">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_content" style="font-size: 20px;">Your Reflection:</label>
+          {{ form.content }}
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn secondary" onclick="toggleCommentForm()">Cancel</button>
+          <button type="submit" class="btn submit">Add Reflection</button>
+        </div>
+      </form>
+
+      {% if entry.comments_set.all %}
+        <div class="comments-list">
+          {% for comment in entry.comments_set.all %}
+            <div class="comment">
+              <div class="comment-header">
+                <h2 class="comment-author">{{ comment.user.username }} commented:</h2>
+                
+              </div>
+              <h3 class="comment-content"><i>{{ comment.content }}</i></h3>
+              <span class="comment-date">{{ comment.created_at|date:"M d, Y" }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="no-comments">No reflections yet.</p>
+      {% endif %}
+    </div>
+
+    <script>
+      function toggleCommentForm() {
+        const form = document.getElementById('commentForm');
+        const btn = document.getElementById('addCommentBtn');
+        if (form.style.display === 'none') {
+          form.style.display = 'block';
+          btn.style.display = 'none';
+        } else {
+          form.style.display = 'none';
+          btn.style.display = 'block';
+        }
+      }
+    </script>
+  </div>
+</section>
+{% endblock %}

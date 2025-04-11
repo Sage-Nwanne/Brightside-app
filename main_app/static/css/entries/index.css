@@ -1,3 +1,5 @@
+
+
 .card-container {
     padding: 0 30px;
     display: flex;
@@ -36,4 +38,19 @@
     margin: 5px 0;
     font-size: var(--font-reg);
   }
-  
+
+  .mood-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+
+  .mood-emoji {
+    font-size: 24px;
+    margin-right: 5px;
+  }
+
+
+
+

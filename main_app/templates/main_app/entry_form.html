@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<div class="page-header">
+    {% if entry %}
+  <h1>Update Entry</h1>
+  {% else %}
+  <h1>Create Entry</h1>
+  {% endif %}
+  <img style="height: 100px; width: 34px; border-radius: 30px; object-fit: cover;" src="{% static 'images/create-entry-lightbulb.png' %}" alt="Entry icon" />
+</div>
+
+<form action="" method="post" class="form-container">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  {% if entry %}
+  <button type="submit" class="btn submit">Update</button>
+  {% else %}
+  <button type="submit" class="btn submit">Create</button>
+  {% endif %}
+</form>
+
+{% endblock %}

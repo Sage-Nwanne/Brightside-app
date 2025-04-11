@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/entries/index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>Archived Entries</h1>
+  <h2 style="font-size: 24px;"><i> archived for safekeeping.</i></h2>
+</section>
+
+<section class="card-container">
+  {% for entry in entries %}
+  <div class="card">
+    <a href="{% url 'entry-detail' entry.id %}">
+      <div class="card-content">
+        <div class="card-header" style="display: flex; align-items: center; gap: 20px;">
+          <img
+            style="background-color: rgba(255, 255, 0, 0.247); height: 50px; width: 50px; border-radius: 30px; object-fit: cover;"
+            class="entry-icon"
+            src="{% static 'images/entry-icon.png' %}"
+            alt="entry-icon-logo"
+          />
+          <h2 class="card-title">{{ entry.title }}</h2>
+        </div>
+        
+        <div class="mood-container">
+          <div class="mood-emoji" style="color: {{ entry.mood_data.color }}">{{ entry.mood_data.emoji }}</div>
+          <div class="mood-label">{{ entry.mood_data.label }}</div>
+        </div>
+        <div>Created at: {{ entry.created_at }}</div>
+
+        {% if entry.updated_at %}
+        <div>Updated at: {{ entry.updated_at }}</div>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+  {% empty %}
+  <div class="no-entries">
+    <h3>No archived entries yet.</h3>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

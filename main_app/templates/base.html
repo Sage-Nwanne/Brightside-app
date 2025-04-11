@@ -23,8 +23,11 @@
       </div>
       <nav>
         <ul>
-            <li><a href="/entries">New Entry</a></li>
-          <li><a href="/about">About</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'entries' %}">View Entries</a></li>
+          <li><a href="{% url 'entries-create' %}">Create Entry</a></li>
+          <li><a href="{% url 'entries' %}?is_archived=true">Archived Entries</a>"</li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
         </ul>
       </nav>
     </header>
