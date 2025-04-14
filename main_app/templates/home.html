@@ -5,16 +5,17 @@
 />
 {% endblock %} {% block content %}
 
-<section class="logo-container">
-  <div class="Home-logo-container">
-    <img
-    style="height: 500px; width: 500px; ; margin-bottom: -230px;"
-      src="{% static 'images/Brightside-line.png' %}"
-      alt="Brightside Logo"
-    />
-  </div>
+
   {% if not user.is_authenticated %}
 <section>
+  <section class="logo-container">
+    <div class="Home-logo-container">
+      <img
+      style="height: 500px; width: 500px; ; margin-bottom: -230px;"
+        src="{% static 'images/Brightside-line.png' %}"
+        alt="Brightside Logo"
+      />
+    </div>
   <form action="{% url 'home' %}" method="post" class="login">
     <h1>Login</h1>
     {% csrf_token %} {{ form.as_p }}
@@ -55,24 +56,27 @@
  
 
   {% else %}
-<section class="welcome-back-container">
-  <div class="welcome-back-container">
-
+  <section class="returning container">
+    <div class="logo-container">
+      <img
+      style="height: 250px; width: 250px; ; position: absolute; top: 200px; left: 200px;"
+        src="{% static 'images/solo-logo.png' %}"
+        alt="Brightside Logo"
+      />
+    </div>
     
-    <h1 style="font-size: 31px; inline-size: max-content;" class="welcome-back">Welcome back, {{ user.username }}!</h1>
+    
+    
+    <div class="welcome-back-container" style="position:absolute; top: 300px; left: 500px;">
 
-    <h3 style="position: relative; top: -213px; font-size:19px; 
-    inline-size: max-content; font-weight: 500;  " 
-    >
-    Capture the good. Reflect with purpose. Live on the Brightside.</h3>
-    <a href="{% url 'entries-create' %}" class="btn submit"
-    style="font-size: 22px; padding: 3px 9px; background-color: floralwhite; position: relative; top: -207px; right: -180px;"
+      <h1 style="font-size: 50px; inline-size: max-content; " class="welcome-back">Welcome back, {{ user.username }}!</h1>
+      
+      <a href="{% url 'entries-create' %}" class="btn submit"
+    style="font-size: 22px; padding: 3px 9px; background-color: floralwhite;"
     >
     Start Journaling</a>
    
-   
-  
-    
+
   </div>
 
 </section>
