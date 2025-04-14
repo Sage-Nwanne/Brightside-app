@@ -2,14 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Entry, MOODS, Comments
 from .forms import CommentForm
 
 # Define the home view function
-def home(request):
-    
-    return render(request, 'home.html')
+class Home(LoginView):
+    template_name = 'home.html'
           
 
 def about(request):
@@ -53,6 +57,33 @@ def entries_detail(request, entry_id):
         'entry': entry,
         'form': form
     })
+
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('entries')  # Changed from 'cat-index' to 'entries'
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'signup.html', context)  # Same as: 
+    # return render(
+    #     request, 
+    #     'signup.html',
+    #     {'form': form, 'error_message': error_message}
+    # )
+
+
+
+
+
+
+
 
 class EntriesCreate(LoginRequiredMixin, CreateView):
     model = Entry

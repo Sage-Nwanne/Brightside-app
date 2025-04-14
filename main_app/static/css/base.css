@@ -300,3 +300,27 @@ body {
       }
     }
   }
+
+
+  #logout-form {
+    margin: 0;
+    padding: 0;
+  }
+
+  #logout-form button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  #logout-form button:hover {
+    color: var(--link-hover-color);
+  }

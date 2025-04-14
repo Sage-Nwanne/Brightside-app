@@ -23,17 +23,29 @@
       </div>
       <nav>
         <ul>
+          {% if user.is_authenticated %}
           <li><a href="/">Home</a></li>
           <li><a href="{% url 'entries' %}">View Entries</a></li>
           <li><a href="{% url 'entries-create' %}">Create Entry</a></li>
-          <li><a href="{% url 'entries' %}?is_archived=true">Archived Entries</a>"</li>
+          <li><a href="{% url 'entries' %}?is_archived=true">Archived Entries</a></li>
           <li><a href="{% url 'about' %}">About Us</a></li>
+          <li>
+            <form action="{% url 'logout' %}" method="POST" id="logout-form" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+          </li>
+          {% else %}
+          <li><a href="{% url 'home' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          {% endif %}
         </ul>
       </nav>
     </header>
     <main>
      {% block content %} 
      {% endblock %}
-     </main>
+    </main>
   </body>
 </html>
