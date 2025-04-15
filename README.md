@@ -99,9 +99,39 @@ The application is configured for deployment on Heroku with:
 ## Future Enhancements
 - [ ] Rich text editing
 - [ ] Image attachments
-- [ ] Mood analytics and insights
 - [ ] Export functionality
 - [ ] Mobile application
+- [ ] Mood Analytics Dashboard
+  - Interactive timeline visualization of emotional patterns
+  - Multiple display formats:
+    - Linear timeline with color-coded emotions
+    - Bar graphs showing mood frequency
+    - Pie charts for mood distribution
+    - Weekly/monthly mood trends
+    - Custom date range selection
+    - Correlation between moods and specific days/times
+  - Customizable visualization preferences
+  - Insights and patterns detection
+  - Export mood data for personal analysis
+- [ ] Social Connection Features
+  - User-to-user connections
+  - Group journaling spaces
+    - Shared timeline views
+    - Collaborative reflection spaces
+    - Group mood tracking and analysis
+  - Privacy Controls
+    - Granular sharing settings
+    - Entry-level privacy options
+    - Selective timeline sharing
+  - Cross-User Interactions
+    - Ability to reflect on others' entries
+    - Shared mood pattern analysis
+    - Group emotional support system
+  - Connection Management
+    - User discovery
+    - Connection requests
+    - Group creation and management
+    - Activity feed for connected users
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
